@@ -32,6 +32,12 @@ spring:
     #jndi-name: jdbc/georeferenciacalidad
     #driver-class-name: oracle.jdbc.OracleDriver
 
+ # SEGURIDAD
+  security:
+    user:
+      name: vladimir
+      password: suncion
+
 logging:
   file:
     name: myapplication.log
