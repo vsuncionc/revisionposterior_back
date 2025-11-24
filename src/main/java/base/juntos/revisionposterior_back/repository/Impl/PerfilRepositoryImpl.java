@@ -6,6 +6,7 @@ import base.juntos.revisionposterior_back.repository.PerfilRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,5 +28,17 @@ public class PerfilRepositoryImpl implements PerfilRepository {
                 .setParameter("P_IN_COD_USUARIO",parametros.getCodUsuario());
         sp.execute();
         return sp.getResultList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Perfiles> listarPerfiles2(String codigoUsuario) {
+        var sp = em
+                .createStoredProcedureQuery(ESQUEMA+".PLISTAPERFILES", Perfiles.class)
+                .registerStoredProcedureParameter("P_OUT_CURSOR",void.class, ParameterMode.REF_CURSOR)
+                .registerStoredProcedureParameter("P_IN_COD_USUARIO",String.class, ParameterMode.IN)
+                .setParameter("P_IN_COD_USUARIO",codigoUsuario);
+        sp.execute();
+        return   sp.getResultList();
     }
 }

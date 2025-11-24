@@ -7,6 +7,7 @@ import base.juntos.revisionposterior_back.service.PerfilService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PerfilServiceImpl implements PerfilService {
@@ -20,5 +21,10 @@ public class PerfilServiceImpl implements PerfilService {
     @Override
     public List<Perfiles> listarPerfiles(UsuInicioSessionRequest parametros) {
         return repo.listarPerfiles(parametros);
+    }
+
+    @Override
+    public List<Perfiles> listarPerfiles2(String codigoUsuario) {
+        return repo.listarPerfiles2(codigoUsuario);
     }
 }
